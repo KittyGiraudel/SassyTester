@@ -1,0 +1,4 @@
+.pages
+.sassdoc
+node_modules
+.sass-cache

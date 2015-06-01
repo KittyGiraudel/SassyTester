@@ -15,4 +15,7 @@ package:
   description: SassyTester is a minimalistic function tester in Sass.
 
 theme: default
-autofill: []
+autofill:
+  - access
+  - content
+  - require

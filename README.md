@@ -1,6 +1,6 @@
 # SassyTester
 
-SassyTester is a minimalistic function tester in Sass.
+SassyTester is a minimalistic function tester in Sass. Read [API documentation](http://hugogiraudel.com/SassyTester/).
 
 ## 1. Create a function
 

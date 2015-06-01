@@ -1,0 +1,120 @@
+/// Test `$function` with `$tests` test suite
+/// @author Hugo Giraudel
+/// @param {String} $function - Name of function to test
+/// @param {Map} $tests - Test suite to run `$function` against
+/// @return {Map} - Return a map containing:
+///   * `function`: `$function`
+///   * `length`: the length of `$tests`
+///   * `pass`: number of passing tests out of `length`
+///   * `fail`: number of failing tests out of `length`
+///   * `tests`: a map where each key of `$tests` is mapped to a map containing:
+///       * `input`: test input (key from `$tests`) 
+///       * `expected`: expected result from `input`
+///       * `actual`: actual result from `input`
+///       * `pass`: whether the test passed or not
+///       * `fail`: whether the test failed or not
+/// @example scss - Testing of a `double` function
+///   @function double($value) { @return $value * 2 }
+///   $test: test('double', (
+///     1: 2,
+///     2: 4,
+///     3: 6,
+///     4: 8,
+///   ));
+/// @example scss - Result of `double` tests
+///   (
+///     'function': 'double',
+///     'length': 4,
+///     'pass': 4,
+///     'fail': 0,
+///     'tests': ( ... ),
+///   )
+/// @example scss - `tests` value from result of `double` tests
+///   (
+///     1: (
+///       'input': 1,
+///       'expected': 2,
+///       'actual': 2,
+///       'pass': true,
+///       'fail': false,
+///     ),
+///     2: (
+///       'input': 2,
+///       'expected': 4,
+///       'actual': 4,
+///       'pass': true,
+///       'fail': false,
+///     ),
+///     3: (
+///       'input': 3,
+///       'expected': 6,
+///       'actual': 6,
+///       'pass': true,
+///       'fail': false,
+///     ),
+///     4: (
+///       'input': 4,
+///       'expected': 8,
+///       'actual': 8,
+///       'pass': true,
+///       'fail': false,
+///     ),
+///   )
+@function test($function, $tests) {
+  $passing-tests: 0;
+  
+  @each $test, $expected-result in $tests {
+    $result: call($function, $test...);
+    
+    $tests: map-merge($tests, ($test: (
+      'input': $test,
+      'expected': $expected-result,
+      'actual': $result,
+      'pass': $result == $expected-result,
+      'fail': $result == $expected-result
+    )));
+
+    @if $result == $expected-result {
+      $passing-tests: $passing-tests + 1;
+    }
+  }
+  
+  @return (
+    'function': $function,
+    'length': length($tests),
+    'tests': $tests,
+    'pass': $passing-tests,
+    'fail': length($tests) - $passing-tests
+  );
+}
+
+/// Mixin decorating the result of `test(..)` function to throw it as an error
+/// @param {Map} $data - Return of `test(..)` function
+/// @example scss - Printing the result of `double` function test
+///   @include run(test('double', $tests-double));
+/// @example scss - Result of `double` function test
+///   Started tests for function `double`
+///   ----------
+///   Test 1 out of 4... ✔
+///   Test 2 out of 4... ✔
+///   Test 3 out of 4... ✔
+///   Test 4 out of 4... ✔
+///   ----------
+///   Finished: 0 test(s) failing out of 4
+@mixin run($data) {
+  $output: '';
+  $length: map-get($data, 'length');
+  $tests: map-get($data, 'tests');
+  
+  @each $test, $value in $tests {
+    $output: $output 
+      + '\a Test #{index(map-keys($tests), $test)} out of #{$length}... '
+      + if(map-get($value, 'pass'), '✔', '✘\a   Expected : `#{map-get($value, "expected")}`\a   Actual   : `#{map-get($value, "actual")}`');
+  }
+  
+  @error 'Started tests for function `#{map-get($data, "function")}`\a '
+    + '----------'
+    + $output + '\a '
+    + '----------\a '
+    + 'Finished: #{map-get($data, "fail")} test(s) failing out of #{$length}';
+}

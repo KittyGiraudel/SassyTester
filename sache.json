@@ -1,0 +1,5 @@
+{
+  "name": "SassyTester",
+  "description": "SassyTester is a minimalistic function tester in Sass.",
+  "tags": ["sass", "scss", "function", "test", "unit test"]
+}

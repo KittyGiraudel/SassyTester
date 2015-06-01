@@ -1,0 +1,17 @@
+basePath: https://github.com/HugoGiraudel/SassyTester/blob/master
+
+display:
+    access:
+        - public
+        - private
+    alias: false
+    watermark: true
+
+package: 
+  name: sassytester
+  title: SassyTester
+  version: 0.1.0
+  homepage: http://hugogiraudel.com/SassyTester
+  description: SassyTester is a minimalistic function tester in Sass.
+
+theme: default

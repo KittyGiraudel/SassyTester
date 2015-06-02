@@ -1,9 +1,9 @@
-/// Test `$function` with `$tests` test suite
+/// Test `$function` with `$test-suite` test suite
 ///
 /// @author Hugo Giraudel
 ///
 /// @param {String} $function - Name of function to test
-/// @param {Map} $tests - Test suite to run `$function` against
+/// @param {Map} $test-suite - Test suite to run `$function` against
 ///
 /// @return {Map}
 ///   * `function`: `$function`
@@ -76,9 +76,14 @@
 }
 
 /// Mixin decorating the result of `test(..)` function to throw it as an error
+/// 
+/// @author Hugo Giraudel
+///
 /// @param {Map} $data - Return of `test(..)` function
+///
 /// @example scss - Printing the result of `double` function test
 ///   @include run(test('double', $tests-double));
+///
 /// @example scss - Result of `double` function test
 ///   Started tests for function `double`
 ///   ----------

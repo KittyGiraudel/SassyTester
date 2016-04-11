@@ -11,7 +11,7 @@
 ///   * `pass`: number of passing tests out of `length`
 ///   * `fail`: number of failing tests out of `length`
 ///   * `tests`: list of maps containing:
-///       * `input`: test input (key from `$tests`) 
+///       * `input`: test input (key from `$tests`)
 ///       * `expected`: expected result from `input`
 ///       * `actual`: actual result from `input`
 ///       * `pass`: whether the test passed or not
@@ -67,7 +67,7 @@
       $passing-tests: $passing-tests + 1;
     }
   }
-  
+
   @return (
     'function': $function,
     'length': length($tests),
@@ -78,7 +78,7 @@
 }
 
 /// Mixin decorating the result of `test(..)` function to throw it as an error
-/// 
+///
 /// @author Hugo Giraudel
 ///
 /// @param {Map} $data - Return of `test(..)` function
@@ -99,14 +99,14 @@
   $output: '';
   $length: map-get($data, 'length');
   $tests: map-get($data, 'tests');
-  
+
   @each $test in $tests {
-    $output: $output 
+    $output: $output
       + 'Test #{index($tests, $test)} out of #{$length}... '
       + if(map-get($test, 'pass'), '✔', '✘\a   Expected : `#{map-get($test, "expected")}`\a   Actual   : `#{map-get($test, "actual")}`') + '\a ';
   }
-  
-  @error 'Started tests for function `#{map-get($data, "function")}`\a '
+
+  @warn 'Started tests for function `#{map-get($data, "function")}`\a '
     + '----------\a '
     + $output + '\a '
     + '----------\a '

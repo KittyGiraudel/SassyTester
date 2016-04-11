@@ -1,9 +1,9 @@
-/// Test `$function` with `$test-suite` test suite
+/// Test `$function` with `$spec` test suite
 ///
 /// @author Hugo Giraudel
 ///
 /// @param {String} $function - Name of function to test
-/// @param {Map} $test-suite - Test suite to run `$function` against
+/// @param {Map} $spec - Test suite to run `$function` against
 ///
 /// @return {Map}
 ///   * `function`: `$function`
@@ -47,21 +47,23 @@
 ///     ),
 ///     // ...
 ///   )
-@function test($function, $test-suite) {
+@function test($function, $spec) {
   $passing-tests: 0;
   $tests: ();
 
-  @each $test, $expected-result in $test-suite {
-    $result: call($function, $test...);
+  @each $arguments, $expected-result in $spec {
+    $actual-result: call($function, $arguments...);
+    $passed: $actual-result == $expected-result;
+
     $tests: append($tests, (
-      'input': $test,
+      'input': $arguments,
       'expected': $expected-result,
-      'actual': $result,
-      'pass': $result == $expected-result,
-      'fail': $result == $expected-result
+      'actual': $actual-result,
+      'pass': $passed,
+      'fail': not $passed,
     ), 'comma');
 
-    @if $result == $expected-result {
+    @if $passed {
       $passing-tests: $passing-tests + 1;
     }
   }
@@ -71,7 +73,7 @@
     'length': length($tests),
     'tests': $tests,
     'pass': $passing-tests,
-    'fail': length($tests) - $passing-tests
+    'fail': length($tests) - $passing-tests,
   );
 }
 

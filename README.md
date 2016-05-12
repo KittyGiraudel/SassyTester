@@ -2,7 +2,17 @@
 
 SassyTester is a minimalistic function tester in Sass. Read [API documentation](http://hugogiraudel.com/SassyTester/).
 
-## 1. Create a function
+## Installation
+
+With Eyeglass (through npm):
+
+```
+npm install sassytester
+```
+
+## Usage
+
+### 1. Create a function
 
 Have a function you want to test.
 
@@ -12,7 +22,7 @@ Have a function you want to test.
 }
 ```
 
-## 2. Write tests
+### 2. Write tests
 
 Writing tests is as simple as creating a Sass map where the key is the function input(s) (thanks to the ability to have lists as keys), and the value is the expected output.
 
@@ -28,7 +38,7 @@ $tests-add: (
 );
 ```
 
-## 3. Run tests
+### 3. Run tests
 
 ```scss
 @include run(test('add', $tests-add));

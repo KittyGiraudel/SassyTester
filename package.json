@@ -1,0 +1,26 @@
+{
+  "title": "SassyTester",
+  "name": "sassytester",
+  "version": "1.0.0",
+  "description": "A minimalistic function tester in Sass",
+  "author": "Hugo Giraudel",
+  "main": "sass/_SassyTester.scss",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/HugoGiraudel/SassyTester.git"
+  },
+  "keywords": [
+    "sass",
+    "test",
+    "tdd",
+    "eyeglass-module"
+  ],
+  "eyeglass": {
+    "exports": "eyeglass-exports.js",
+    "needs": "*"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HugoGiraudel/SassyTester/issues"
+  }
+}

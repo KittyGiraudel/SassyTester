@@ -1,7 +1,7 @@
 {
   "title": "SassyTester",
   "name": "sassytester",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A minimalistic function tester in Sass",
   "author": "Hugo Giraudel",
   "main": "sass/_SassyTester.scss",

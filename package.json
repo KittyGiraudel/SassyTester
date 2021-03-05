@@ -3,11 +3,11 @@
   "name": "sassytester",
   "version": "1.1.0",
   "description": "A minimalistic function tester in Sass",
-  "author": "Hugo Giraudel",
+  "author": "Kitty Giraudel",
   "main": "sass/_SassyTester.scss",
   "repository": {
     "type": "git",
-    "url": "git://github.com/HugoGiraudel/SassyTester.git"
+    "url": "git://github.com/KittyGiraudel/SassyTester.git"
   },
   "keywords": [
     "sass",
@@ -21,6 +21,6 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HugoGiraudel/SassyTester/issues"
+    "url": "https://github.com/KittyGiraudel/SassyTester/issues"
   }
 }
